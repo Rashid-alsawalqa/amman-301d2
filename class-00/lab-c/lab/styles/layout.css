@@ -1,0 +1,64 @@
+.recipe {
+  letter-spacing: .1em;
+  height: 260px;
+  padding: 37px 0 0 60px;
+  margin: 40px 0;
+}
+aside {
+  padding-top: 30px;
+  padding-bottom: 60px
+}
+
+#slogan {
+    width: 250px;
+    padding-left: 55px;
+    text-transform: uppercase;
+}
+
+.print, .date {
+    margin: 0;
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-bottom: 33px;
+}
+.date {
+    float: left;
+} 
+.print {
+    text-decoration: none;
+    padding-left: 30px;
+    float: right;
+} 
+aside img {
+    float: left;
+}
+
+nav, article, aside, footer section {
+    margin: 0 auto;
+    width: 900px;
+}
+nav {
+    margin-top: 25px;
+}
+#logo {
+    float: left;
+    padding-bottom: 25px;
+    text-decoration: none;
+}
+    
+    
+    
+h2 {
+ margin-top: 50px;
+}
+#logo img {
+    float: left;
+}
+nav ul {
+    float: right;
+}
+              
+nav li {
+    float: left;
+    padding-right: 2px;
+}
