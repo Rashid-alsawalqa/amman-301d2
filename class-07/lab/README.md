@@ -2,13 +2,13 @@
 
 ## Resources
 
-[Superagent Docs](https://visionmedia.github.io/superagent/)
+[Superagent Docs](https://visionmedia.github.io/superagent/){:target="_blank"}
 
-[Google Maps and Geocoding API Docs](https://cloud.google.com/maps-platform/){:target="_blank"} - Click on the Get Started button and select both the 'Maps' and 'Places' options and create a placeholder app with a name like "Lab 6".
+[Location IQ Geocoding API](https://locationiq.com/docs#forward-geocoding){:target="_blank"} - Specifically, the "Search Forward/GeoCoding" section
 
-[Dark Sky API Docs](https://darksky.net/dev/docs)
+[Dark Sky API Docs](https://darksky.net/dev/docs){:target="_blank"}
 
-[eventful API Docs](http://api.eventful.com/docs)
+[eventful API Docs](http://api.eventful.com/docs){:target="_blank"}
 
 ## Configuration
 
@@ -33,7 +33,7 @@ lab-07-repository
 
 ### Overview
 
-For this lab assignment, you will use latitude and longitude data from the Google Geocoding API to request localized information from the DarkSky weather API and the Event API.
+For this lab assignment, you will use latitude and longitude data from the Location IQ Geocoding API to request localized information from the DarkSky weather API and the Event API.
 
 Additionally, you'll be cache-ing the data returned from the Geocoding API so that your server does not have to constantly re-fetch data that does not change.
 
@@ -62,7 +62,7 @@ Add this information to your README.
 
 ### Code Review
 
-- From this point on, work on semantically-named non-master branches. 
+- From this point on, work on semantically-named non-master branches.
 - The student whose lab 6 solution code was not selected should now be the driver. With your partner, identify three improvements. This should either be pieces of code that can be refactored or three sections of the code base to add verbose comments to. Note: you do not need to select one or the other. For example, you may select one section to comment on and two pieces of code that can be refactored, for a total of three improvements.
 - Work on one improvement at a time, making sure to add, commit, and push the changes as each improvement is complete. These will serve as the first three commits which your TA will review during grading, so pay attention to your Git/GitHub workflow. Once all three improvements are complete, create and merge a pull request to your master branch.
 
