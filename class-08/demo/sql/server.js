@@ -3,67 +3,63 @@
 // Load Environment Variables from the .env file
 require('dotenv').config();
 
+const pg = require('pg');
+const client = new pg.Client(process.env.DATABASE_URL);
+client.on('error', error => {throw error;})
+
 // Application Dependencies
 const express = require('express');
-const pg = require('pg');
 
 // Application Setup
 const PORT = process.env.PORT;
-const app = express();
-
-// Database Connection Setup
-const client = new pg.Client(process.env.DATABASE_URL);
-client.on('error', err => {throw err;});
+const server = express();
 
 // Routes
-app.get('/', (request, response) => {
-  response.status(200).send('ok');
+server.get('/', (request, response) => {
+  response.status(200).send('Hi Class');
 });
 
-// Add People, based on QueryString Params
-app.get('/add', (request, response) => {
-  let firstName = request.query.first;
-  let lastName = request.query.last;
-  let SQL = 'INSERT INTO people (first_name, last_name) VALUES ($1, $2) RETURNING *';
-  let safeValues = [firstName, lastName];
-  client.query(SQL, safeValues)
-    .then( results => {
-      response.status(200).json(results);
-    })
-    .catch( error => errorHandler(error) );
+server.get('/people', (request, response) => {
+  // SQL query
+  let sql = `SELECT * FROM people`;
+  client.query(sql)
+  .then((data)=>{
+    // console.log(data.rows);
+    response.status(200).json(data.rows);
+  });
 });
 
-// Get everything in the database
-// Stretch goal ... do it with a where
-app.get('/people', (request, response) => {
-  let SQL = 'SELECT * FROM people';
-  client.query(SQL)
-    .then( results => {
-      response.status(200).json(results.rows);
-    })
-    .catch( error => errorHandler(error) );
+server.get('/add', (request, response) => {
+  let first = request.query['first'];
+  let last = request.query['last'];
+  // console.log(first, last);
+
+  let sql = `INSERT INTO people(first_name, last_name) VALUES ($1, $2) RETURNING *`;
+  let queryData = [first, last];
+  client.query(sql,queryData)
+  .then((data)=>{
+    response.status(200).send("Worked");
+  });
+
 });
+
+
 
 // Error Handler Routes
-app.use('*', notFoundHandler);
-app.use(errorHandler);
+server.use('*', (request,response) => {
+    response.status(404).send('huh?');
+});
 
-function notFoundHandler(request,response) {
-  response.status(404).send('huh?');
-}
-
-function errorHandler(error,request,response) {
+server.use((error, request, response) => {
   response.status(500).send(error);
-}
+});
 
-// Connect to DB and Start the Web Server
+
 client.connect()
-  .then( () => {
-    app.listen(PORT, () => {
-      console.log('Server up on', PORT);
-    });
-  })
-  .catch(err => {
-    throw `PG Startup Error: ${err.message}`;
-  });
+.then( () => {
+  server.listen(PORT, () => console.log('Server up on', PORT));
+})
+.catch(err => {
+  throw `Error happend ${err}`;
+});
 
